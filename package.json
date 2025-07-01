@@ -5,18 +5,14 @@
 	"license": "MIT",
 	"devDependencies": {
 		"@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
-		"@storybook/addon-essentials": "^8.0.5",
-		"@storybook/addon-interactions": "^8.0.5",
-		"@storybook/addon-links": "^8.0.5",
-		"@storybook/addon-onboarding": "^8.0.5",
+		"@storybook/addon-links": "^9.0.14",
+		"@storybook/addon-onboarding": "^9.0.14",
 		"@storybook/addon-styling-webpack": "^1.0.0",
-		"@storybook/addon-webpack5-compiler-swc": "^1.0.2",
-		"@storybook/blocks": "^8.0.5",
-		"@storybook/react-webpack5": "^8.0.5",
-		"@storybook/test": "^8.0.5",
+		"@storybook/addon-webpack5-compiler-swc": "^3.0.0",
+		"@storybook/react-webpack5": "^9.0.14",
 		"@svgr/webpack": "^8.0.1",
-		"@types/react": "^18.2.0",
-		"@types/react-dom": "^18.2.1",
+		"@types/react": "^18.3.23",
+		"@types/react-dom": "^18.3.7",
 		"@typescript-eslint/eslint-plugin": "^5.59.11",
 		"@typescript-eslint/parser": "^5.59.11",
 		"autoprefixer": "^10.4.14",
@@ -45,7 +41,7 @@
 		"resolve-url-loader": "^5.0.0",
 		"sass": "^1.69.7",
 		"sass-loader": "^13.3.3",
-		"storybook": "^8.0.5",
+		"storybook": "^9.0.14",
 		"style-loader": "^3.3.3",
 		"stylelint": "^16.1.0",
 		"stylelint-config-standard-scss": "^13.0.0",
@@ -56,7 +52,9 @@
 		"url-loader": "^4.1.1",
 		"webpack": "^5.81.0",
 		"webpack-cli": "^5.0.2",
-		"webpack-dev-server": "^4.15.0"
+		"webpack-dev-server": "^4.15.0",
+		"eslint-plugin-storybook": "9.0.14",
+		"@storybook/addon-docs": "^9.0.14"
 	},
 	"scripts": {
 		"build": "cross-env NODE_ENV=production webpack --config webpack/webpack.config.js --env env=prod",
@@ -77,7 +75,7 @@
 		]
 	},
 	"dependencies": {
-		"clsx": "^2.1.0",
+		"clsx": "^2.1.1",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0"
 	},
