@@ -22,26 +22,26 @@ type ArticleParamsFormProps = {
 	initialState: ArticleStateType;
 	onApply: (params: ArticleStateType) => void;
 	onReset: () => void;
-	setFormState: (params: ArticleStateType) => void;
 };
 
 export const ArticleParamsForm = ({
 	initialState,
 	onApply,
 	onReset,
-	setFormState,
 }: ArticleParamsFormProps) => {
-	const [isOpen, setIsOpen] = useState(false);
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	const [localFormState, setLocalFormState] =
 		useState<ArticleStateType>(initialState);
 	const sidebarRef = useRef<HTMLDivElement>(null);
 	const arrowButtonRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
+		if (!isMenuOpen) return;
 		setLocalFormState(initialState);
-	}, [initialState]);
+	}, [initialState, isMenuOpen]);
 
 	useEffect(() => {
+		if (!isMenuOpen) return;
 		const handleClickOutside = (e: MouseEvent) => {
 			if (
 				sidebarRef.current &&
@@ -49,46 +49,43 @@ export const ArticleParamsForm = ({
 				!sidebarRef.current.contains(e.target as Node) &&
 				!arrowButtonRef.current.contains(e.target as Node)
 			) {
-				setIsOpen(false);
+				setIsMenuOpen(false);
 			}
 		};
 
 		document.addEventListener('mousedown', handleClickOutside);
 		return () => document.removeEventListener('mousedown', handleClickOutside);
-	}, []);
+	}, [isMenuOpen]);
 
 	const toggleSidebar = () => {
-		setIsOpen(!isOpen);
+		setIsMenuOpen(!isMenuOpen);
 	};
 
 	const handleFieldChange =
 		(field: keyof ArticleStateType) => (value: OptionType) => {
-			const newState = { ...localFormState, [field]: value };
-			setLocalFormState(newState);
-			setFormState(newState);
+			setLocalFormState((prev) => ({ ...prev, [field]: value }));
 		};
 
 	const handleSubmit = (event: React.FormEvent) => {
 		event.preventDefault();
 		onApply(localFormState);
-		setIsOpen(false);
+		setIsMenuOpen(false);
 	};
 
 	const handleReset = () => {
 		setLocalFormState(defaultArticleState);
-		setFormState(defaultArticleState);
 		onReset();
 	};
 
 	return (
 		<>
 			<div ref={arrowButtonRef}>
-				<ArrowButton isOpen={isOpen} onClick={toggleSidebar} />
+				<ArrowButton isOpen={isMenuOpen} onClick={toggleSidebar} />
 			</div>
 			<aside
 				ref={sidebarRef}
 				className={clsx(styles.container, {
-					[styles.container_open]: isOpen,
+					[styles.container_open]: isMenuOpen,
 				})}>
 				<form
 					className={styles.form}
